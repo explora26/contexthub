@@ -50,10 +50,6 @@
 #define BMI160_SPI_SPEED_HZ       4000000
 #define BMI160_SPI_MODE           3
 
-#define BMI160_INT_IRQ            EXTI9_5_IRQn
-#define BMI160_INT1_PIN           GPIO_PB(6)
-#define BMI160_INT2_PIN           GPIO_PB(7)
-
 #define BMI160_ID                 0xd1
 
 #define BMI160_REG_ID             0x00
