@@ -46,7 +46,6 @@
 #define USE_LOW_POWER                   0
 #define CALCULATE_WATERMARK_LEVEL       1
 
-#define BMI160_SPI_BUS_ID         1
 #define BMI160_SPI_SPEED_HZ       4000000
 #define BMI160_SPI_MODE           3
 
@@ -2362,7 +2361,7 @@ static bool startTask(uint32_t task_id)
     mTask.mode.cpha = SPI_CPHA_TRAILING_EDGE;
     mTask.mode.nssChange = true;
     mTask.mode.format = SPI_FORMAT_MSB_FIRST;
-    mTask.cs = GPIO_PB(12);
+    mTask.cs = BMI160_SPI_CS;
     spiMasterRequest(BMI160_SPI_BUS_ID, &mTask.spiDev);
 
     for (i = ACC; i < NUM_OF_SENSOR; i++) {

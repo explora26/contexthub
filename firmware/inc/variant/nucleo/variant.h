@@ -38,6 +38,8 @@ extern "C" {
 #define DEBUG_UART_GPIO_TX          GPIO_PA(2)
 #define DEBUG_UART_GPIO_RX          GPIO_PA(3)
 
+#define BMI160_SPI_BUS_ID         1
+#define BMI160_SPI_CS             GPIO_PB(12)
 #define BMI160_INT_IRQ            EXTI9_5_IRQn
 #define BMI160_INT1_PIN           GPIO_PB(6)
 #define BMI160_INT2_PIN           GPIO_PB(7)
