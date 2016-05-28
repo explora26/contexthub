@@ -139,6 +139,8 @@ uint32_t cvprintf(printf_write_c putc_f, void* userData, const char* fmtStr, va_
 
         if (c == '\n') {
 
+            putc_(userData,'\r');
+            numPrinted++;
             putc_(userData,c);
             numPrinted++;
         }
