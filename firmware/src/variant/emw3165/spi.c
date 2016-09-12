@@ -19,49 +19,53 @@
 
 static const struct StmSpiBoardCfg mStmSpiBoardCfgs[] = {
     [0] = {
-        .gpioMiso = GPIO_PA(6),
-        .gpioMosi = GPIO_PA(7),
-        .gpioSclk = GPIO_PA(5),
-        .gpioNss = GPIO_PA(4),
+        .gpioMiso = GPIO_PA(12),
+        .gpioMosi = GPIO_PA(10),
+        .gpioSclk = GPIO_PB(0),
+        .gpioNss = GPIO_PB(1),
 
-        .gpioFuncMiso = GPIO_AF_SPI1,
-        .gpioFuncMosi = GPIO_AF_SPI1,
-        .gpioFuncSclk = GPIO_AF_SPI1,
-        .gpioFuncNss = GPIO_AF_SPI1,
+        .gpioFuncMiso = GPIO_AF_SPI5_B,
+        .gpioFuncMosi = GPIO_AF_SPI5_B,
+        .gpioFuncSclk = GPIO_AF_SPI5_B,
+        .gpioFuncNss = GPIO_AF_SPI5_B,
         .gpioSpeed = GPIO_SPEED_MEDIUM,
 
-        .irqNss = EXTI4_IRQn,
+        .irqNss = EXTI1_IRQn,
 
-        .dmaRx = SPI1_DMA_RX_CFG_B,
-        .dmaTx = SPI1_DMA_TX_CFG_B,
+        .dmaRx = SPI5_DMA_RX_CFG_B,
+        .dmaTx = SPI5_DMA_TX_CFG_B,
 
         .sleepDev = -1,
     },
     [1] = {
-        .gpioMiso = GPIO_PB(14),
-        .gpioMosi = GPIO_PB(15),
+        .gpioMiso = GPIO_PA(11),
+        .gpioMosi = GPIO_PA(1),
         .gpioSclk = GPIO_PB(13),
         .gpioNss = GPIO_PB(12),
 
+        .gpioFuncMiso = GPIO_AF_SPI4_B,
+        .gpioFuncMosi = GPIO_AF_SPI4_A,
+        .gpioFuncSclk = GPIO_AF_SPI4_B,
+        .gpioFuncNss = GPIO_AF_SPI4_B,
         .gpioSpeed = GPIO_SPEED_MEDIUM,
-        .gpioFuncMiso = GPIO_AF_SPI2_A,
-        .gpioFuncMosi = GPIO_AF_SPI2_A,
-        .gpioFuncSclk = GPIO_AF_SPI2_A,
-        .gpioFuncNss = GPIO_AF_SPI2_A,
 
         .irqNss = EXTI15_10_IRQn,
 
-        .dmaRx = SPI2_DMA_RX_CFG,
-        .dmaTx = SPI2_DMA_TX_CFG,
+        .dmaRx = SPI4_DMA_RX_CFG_B,
+        .dmaTx = SPI4_DMA_TX_CFG_B,
 
         .sleepDev = Stm32sleepDevSpi2,
-    },
+    }
 };
 
 const struct StmSpiBoardCfg *boardStmSpiCfg(uint8_t busId)
 {
-    if (busId >= ARRAY_SIZE(mStmSpiBoardCfgs))
-        return NULL;
+    switch (busId) {
+        case 3:
+        return &mStmSpiBoardCfgs[1];
+        case 4:
+        return &mStmSpiBoardCfgs[0];
+    }
 
-    return &mStmSpiBoardCfgs[busId];
+    return NULL;
 }

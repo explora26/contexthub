@@ -24,7 +24,10 @@ static const struct StmSpiBoardCfg mStmSpiBoardCfgs[] = {
         .gpioSclk = GPIO_PA(5),
         .gpioNss = GPIO_PA(4),
 
-        .gpioFunc = GPIO_AF_SPI1,
+        .gpioFuncMiso = GPIO_AF_SPI1,
+        .gpioFuncMosi = GPIO_AF_SPI1,
+        .gpioFuncSclk = GPIO_AF_SPI1,
+        .gpioFuncNss = GPIO_AF_SPI1,
         .gpioSpeed = GPIO_SPEED_MEDIUM,
 
         .irqNss = -1,
@@ -41,7 +44,10 @@ static const struct StmSpiBoardCfg mStmSpiBoardCfgs[] = {
         .gpioNss = GPIO_PB(12),
 
         .gpioSpeed = GPIO_SPEED_MEDIUM,
-        .gpioFunc = GPIO_AF_SPI2_A,
+        .gpioFuncMiso = GPIO_AF_SPI2_A,
+        .gpioFuncMosi = GPIO_AF_SPI2_A,
+        .gpioFuncSclk = GPIO_AF_SPI2_A,
+        .gpioFuncNss = GPIO_AF_SPI2_A,
 
         .irqNss = EXTI15_10_IRQn,
 

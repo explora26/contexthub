@@ -54,6 +54,12 @@ extern "C" {
     { (uint8_t *)(__shared_start + 0x20000), 0x20000, BL_FLASH_SHARED },\
 }
 
+#define BMI160_SPI_BUS_ID         1
+#define BMI160_SPI_CS             GPIO_PB(12)
+#define BMI160_INT_IRQ            EXTI9_5_IRQn
+#define BMI160_INT1_PIN           GPIO_PB(6)
+#define BMI160_INT2_PIN           GPIO_PB(7)
+
 #define BMI160_TO_ANDROID_COORDINATE(x, y, z)   \
     do {                                        \
         int32_t xi = x, yi = y, zi = z;         \

@@ -127,13 +127,13 @@ static inline struct Gpio *stmSpiGpioInit(uint32_t gpioNum, enum StmGpioSpeed sp
 
 static inline void stmSpiDataPullMode(struct StmSpiDev *pdev, enum StmGpioSpeed dataSpeed, enum GpioPullMode dataPull)
 {
-    gpioConfigAlt(pdev->miso, dataSpeed, dataPull, GPIO_OUT_PUSH_PULL, pdev->board->gpioFunc);
-    gpioConfigAlt(pdev->mosi, dataSpeed, dataPull, GPIO_OUT_PUSH_PULL, pdev->board->gpioFunc);
+    gpioConfigAlt(pdev->miso, dataSpeed, dataPull, GPIO_OUT_PUSH_PULL, pdev->board->gpioFuncMiso);
+    gpioConfigAlt(pdev->mosi, dataSpeed, dataPull, GPIO_OUT_PUSH_PULL, pdev->board->gpioFuncMosi);
 }
 
 static inline void stmSpiSckPullMode(struct StmSpiDev *pdev, enum StmGpioSpeed sckSpeed, enum GpioPullMode sckPull)
 {
-    gpioConfigAlt(pdev->sck, sckSpeed, sckPull, GPIO_OUT_PUSH_PULL, pdev->board->gpioFunc);
+    gpioConfigAlt(pdev->sck, sckSpeed, sckPull, GPIO_OUT_PUSH_PULL, pdev->board->gpioFuncSclk);
 }
 
 static inline void stmSpiStartDma(struct StmSpiDev *pdev,
@@ -256,7 +256,7 @@ static int stmSpiSlaveStartSync(struct SpiDevice *dev,
     stmSpiSckPullMode(pdev, pdev->board->gpioSpeed, GPIO_PULL_NONE);
 
     if (!pdev->nss)
-        pdev->nss = stmSpiGpioInit(pdev->board->gpioNss, pdev->board->gpioSpeed, pdev->board->gpioFunc);
+        pdev->nss = stmSpiGpioInit(pdev->board->gpioNss, pdev->board->gpioSpeed, pdev->board->gpioFuncNss);
     if (!pdev->nss)
         return -ENODEV;
 
@@ -583,19 +583,42 @@ static const struct StmSpiCfg mStmSpiCfgs[] = {
 
         .dmaBus = SPI3_DMA_BUS,
     },
+    [3] = {
+        .regs = (struct StmSpi *)SPI4_BASE,
+
+        .clockBus = PERIPH_BUS_APB2,
+        .clockUnit = PERIPH_APB2_SPI4,
+
+        .irq = SPI4_IRQn,
+
+        .dmaBus = SPI4_DMA_BUS,
+    },
+    [4] = {
+        .regs = (struct StmSpi *)SPI5_BASE,
+
+        .clockBus = PERIPH_BUS_APB2,
+        .clockUnit = PERIPH_APB2_SPI5,
+
+        .irq = SPI5_IRQn,
+
+        .dmaBus = SPI5_DMA_BUS,
+    },
 };
 
 static struct StmSpiDev mStmSpiDevs[ARRAY_SIZE(mStmSpiCfgs)];
 DECLARE_IRQ_HANDLER(1)
 DECLARE_IRQ_HANDLER(2)
 DECLARE_IRQ_HANDLER(3)
+DECLARE_IRQ_HANDLER(4)
+DECLARE_IRQ_HANDLER(5)
+DECLARE_IRQ_HANDLER(6)
 
 static void stmSpiInit(struct StmSpiDev *pdev, const struct StmSpiCfg *cfg,
         const struct StmSpiBoardCfg *board, struct SpiDevice *dev)
 {
-    pdev->miso = stmSpiGpioInit(board->gpioMiso, board->gpioSpeed, board->gpioFunc);
-    pdev->mosi = stmSpiGpioInit(board->gpioMosi, board->gpioSpeed, board->gpioFunc);
-    pdev->sck = stmSpiGpioInit(board->gpioSclk, board->gpioSpeed, board->gpioFunc);
+    pdev->miso = stmSpiGpioInit(board->gpioMiso, board->gpioSpeed, board->gpioFuncMiso);
+    pdev->mosi = stmSpiGpioInit(board->gpioMosi, board->gpioSpeed, board->gpioFuncMosi);
+    pdev->sck = stmSpiGpioInit(board->gpioSclk, board->gpioSpeed, board->gpioFuncSclk);
 
     NVIC_EnableIRQ(cfg->irq);
 

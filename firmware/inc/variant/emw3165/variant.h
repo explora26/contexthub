@@ -27,22 +27,22 @@ extern "C" {
 #define RTC_CLK                     RTC_CLK_LSE
 
 //spi bus for comms
-#define PLATFORM_HOST_INTF_SPI_BUS  0
+#define PLATFORM_HOST_INTF_SPI_BUS  4
 
-#define SH_INT_WAKEUP               GPIO_PA(0)
-#define SH_EXTI_WAKEUP_IRQ          EXTI0_IRQn
-#define AP_INT_WAKEUP               GPIO_PA(1)
+#define SH_INT_WAKEUP               GPIO_PA(4)
+#define SH_EXTI_WAKEUP_IRQ          EXTI4_IRQn
+#define AP_INT_WAKEUP               GPIO_PC(13)
 #undef AP_INT_NONWAKEUP
 
 #define DEBUG_UART_UNITNO           2
 #define DEBUG_UART_GPIO_TX          GPIO_PA(2)
 #define DEBUG_UART_GPIO_RX          GPIO_PA(3)
 
-#define BMI160_SPI_BUS_ID         1
+#define BMI160_SPI_BUS_ID         3
 #define BMI160_SPI_CS             GPIO_PB(12)
 #define BMI160_INT_IRQ            EXTI9_5_IRQn
 #define BMI160_INT1_PIN           GPIO_PB(6)
-#define BMI160_INT2_PIN           GPIO_PB(7)
+#define BMI160_INT2_PIN           GPIO_PA(5)
 
 #define BMI160_TO_ANDROID_COORDINATE(x, y, z)   \
     do {                                        \
@@ -56,20 +56,17 @@ extern "C" {
         x = xi; y = -yi; z = -zi;               \
     } while (0)
 
-#define HALL_PIN        GPIO_PB(5)
-#define HALL_IRQ        EXTI9_5_IRQn
+#define HALL_PIN GPIO_PB(5)
+#define HALL_IRQ EXTI9_5_IRQn
 
-#define VSYNC_PIN       GPIO_PB(1)
-#define VSYNC_IRQ       EXTI1_IRQn
+#define VSYNC_PIN GPIO_PB(1)
+#define VSYNC_IRQ EXTI1_IRQn
 
-#define PROX_INT_PIN    GPIO_PB(10)
-#define PROX_IRQ        EXTI15_10_IRQn
-
-//define tap sensor threshold
-#define TAP_THRESHOLD   0x01
+//define tap sensor threshould
+#define TAP_THRESHOULD 0x01
 
 //define Accelerometer fast compensation config
-#define ACC_FOC_CONFIG  0x3d
+#define ACC_FOC_CONFIG 0x3d
 
 #ifdef __cplusplus
 }

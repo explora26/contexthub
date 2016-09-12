@@ -34,7 +34,10 @@ struct StmSpiBoardCfg {
     uint8_t gpioSclk;
     uint8_t gpioNss;
 
-    enum StmGpioAltFunc gpioFunc;
+    enum StmGpioAltFunc gpioFuncMiso;
+    enum StmGpioAltFunc gpioFuncMosi;
+    enum StmGpioAltFunc gpioFuncSclk;
+    enum StmGpioAltFunc gpioFuncNss;
     enum StmGpioSpeed gpioSpeed;
     enum GpioPullMode gpioPull;
 

@@ -123,6 +123,8 @@ typedef enum IRQn
     CRYP_IRQn                    = 79,
     HASH_RNG_IRQn                = 80,
     FPU_IRQn                     = 81,
+    SPI4_IRQn                    = 84,
+    SPI5_IRQn                    = 85,
     NUM_INTERRUPTS
 } IRQn_Type;
 
