@@ -82,14 +82,19 @@
 
 #define BMI160_SPI_WRITE          0x00
 #define BMI160_SPI_READ           0x80
-
+#ifndef BMI160_SPI_BUS_ID
 #define BMI160_SPI_BUS_ID         1
+#endif
 #define BMI160_SPI_SPEED_HZ       8000000
 #define BMI160_SPI_MODE           3
 
 #define BMI160_INT_IRQ            EXTI9_5_IRQn
+#ifndef BMI160_INT1_PIN
 #define BMI160_INT1_PIN           GPIO_PB(6)
+#endif
+#ifndef BMI160_INT2_PIN
 #define BMI160_INT2_PIN           GPIO_PB(7)
+#endif
 
 #define BMI160_ID                 0xd1
 

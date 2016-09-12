@@ -63,7 +63,7 @@ extern "C" {
 #define VSYNC_IRQ EXTI1_IRQn
 
 //define tap sensor threshould
-#define TAP_THRESHOULD 0x01
+#define TAP_THRESHOLD 0x01
 
 //define Accelerometer fast compensation config
 #define ACC_FOC_CONFIG 0x3d
